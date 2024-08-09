@@ -16,8 +16,8 @@ namespace valdationLib
 
         while (cin.fail())
         {
+	    // used to reset any error flags in the input stream
             cin.clear();
-
             //Extracts characters from the input sequence and discards them
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Invalid number, Enter a valid number: ";
