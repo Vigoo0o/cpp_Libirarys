@@ -9,21 +9,41 @@ namespace valdationLib
 {
     int readNumber(string massage = "Enter Number: ")
     {
-        int number = 0;
+        int num = 0;
 
         cout << massage;
-        cin >> number;
+        cin >> num;
 
         while (cin.fail())
         {
-	    // used to reset any error flags in the input stream
+	        // used to reset any error flags in the input stream
             cin.clear();
             //Extracts characters from the input sequence and discards them
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Invalid number, Enter a valid number: ";
-            cin >> number;
+            cin >> num;
         }
 
-        return number;
+        return num;
+    }
+
+    string readString(string massage = "Enter: ")
+    {
+        string str = "";
+
+        cout << massage;
+        getline(cin, str);
+
+        while (cin.fail())
+        {
+	        // used to reset any error flags in the input stream
+            cin.clear();
+            //Extracts characters from the input sequence and discards them
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid number, Enter a valid number: ";
+            cin >> str;
+        }
+
+        return str;
     }
 }
