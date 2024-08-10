@@ -13,7 +13,6 @@ using namespace std;
 
 int main()
 {
-    string name = valdationLib::readString("Enter Your Name: ");
-    cout << "\nYour name is: " << name << "\n\n";
+    cout << "";
     return 0;
 }

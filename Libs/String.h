@@ -158,4 +158,25 @@ namespace StringLib
         return count;
     }
 
+    string toLowerCase(string str)
+    {
+        string result = "";
+
+        for(char c : str)
+        {
+            if(int(c) >= 65 && int(c) <= 90)
+                result += char(c + 32);
+            else 
+                result += c;
+        }
+
+        return result;
+    }
+
+    bool isPalindrom (string str)
+    {
+        string strReverse = reverseString(str);
+        return toLowerCase(strReverse) == toLowerCase(str) ? true : false;
+    }
+
 }
