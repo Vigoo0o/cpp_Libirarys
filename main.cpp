@@ -11,8 +11,11 @@
 
 using namespace std;
 
+
+
 int main()
 {
-    cout << "";
+    cout << MathLib::Pow(5, 5) << endl;
+
     return 0;
 }

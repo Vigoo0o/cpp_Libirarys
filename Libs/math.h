@@ -265,4 +265,20 @@ namespace MathLib
     {
         return pow(Number, 0.5);
     }
+
+    // With Recursev Function
+    // 5 * Pow(5, 4)
+    // 5 * (5 * Pow(5, 3))
+    // 5 * (5 * (5 * Pow(5,2)))
+    // 5 * (5 * (5 * (5 * Pow(5, 1))))
+    // 5 * (5 * (5 * (5 * (5 * Pow(5, 0)))))
+    // 5 * (5 * (5 * (5 * (5 * (1)))))
+    int Pow(int Base, int Power)
+    {
+        if(Power == 0) return 1;
+        else
+        {
+            return Base * Pow(Base, Power - 1);
+        }
+    }
 }
