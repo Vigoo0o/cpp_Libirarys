@@ -296,4 +296,11 @@ namespace ArrayLib
 
         return Counter;
     }
+
+    // Print Array Using Pointer
+    void printArray(int *arrPtr, int size)
+    {
+        for(int i = 0; i < size; i++)
+            cout << *(arrPtr + i) << endl;
+    }
 }
