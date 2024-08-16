@@ -11,11 +11,29 @@
 
 using namespace std;
 
+// Swap Function Using Poiners
+
+void swap(int *ptr1, int *ptr2)
+{
+    int temp;
+    temp = *ptr1;
+    *ptr1 = *ptr2;
+    *ptr2 = temp;
+}
 
 
 int main()
 {
-    cout << MathLib::Pow(5, 5) << endl;
+    int a = 1, b = 2;
 
+    cout << "a Before Swaping Is: " << a << endl;
+    cout << "b Before Swaping Is: " << b << endl;
+    cout << endl;
+
+    swap(&a, &b);
+
+    cout << "a After Swaping Is: " << a << endl;
+    cout << "b After Swaping Is: " << b << endl;
+    cout << endl;
     return 0;
 }

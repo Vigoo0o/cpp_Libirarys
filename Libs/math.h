@@ -189,13 +189,22 @@ namespace MathLib
         return RandomNumber;
     }
 
+    // By Referncing
     void Swap(int& A, int& B)
     {
         int Temp;
-
         Temp = A;
         A = B;
         B = Temp;
+    }
+
+    // Using Pointer
+    void swap(int *ptr1, int *ptr2)
+    {
+        int temp;
+        temp = *ptr1;
+        *ptr1 = *ptr2;
+        *ptr2 = temp;
     }
 
     bool IsOdd(int Number)
