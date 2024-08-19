@@ -38,4 +38,20 @@ namespace fileLib
             file.close();
         }
     }
+    void saveVectorToFile(string filePath, vector<string> &vFile)
+    {
+        fstream file;
+
+        file.open(filePath,  ios::out);
+
+       if(file.is_open())
+      {
+          for(string &str : vFile)
+      	  {
+              file << str << "\n";
+          }
+
+          file.close();
+    }
+ }
 }
