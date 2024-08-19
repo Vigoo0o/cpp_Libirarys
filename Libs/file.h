@@ -22,4 +22,20 @@ namespace fileLib
             file.close();
         }
     }
+
+    void loadDataFromFileToVector(string filePath, vector<string> &vFile)
+    {
+        fstream file;
+        file.open(filePath, ios::in);
+
+        if(file.is_open())
+        {
+            string line;
+            while (getline(file, line))
+            {
+                vFile.push_back(line);
+            }
+            file.close();
+        }
+    }
 }

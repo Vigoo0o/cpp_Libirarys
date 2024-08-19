@@ -1,6 +1,8 @@
 // To Tist Functions
 
 #include <iostream>
+#include <fstream>
+#include <vector>
 
 #include "./Libs/array.h"
 #include "./Libs/IO.h"
@@ -8,32 +10,34 @@
 #include "./Libs/String.h"
 #include "./Libs/Utility.h"
 #include "./Libs/valdation.h"
+#include "./Libs/file.h"
 
 using namespace std;
 
-// Swap Function Using Poiners
-
-void swap(int *ptr1, int *ptr2)
+void loadDataFromFileToVector(string filePath, vector<string> &vFile)
 {
-    int temp;
-    temp = *ptr1;
-    *ptr1 = *ptr2;
-    *ptr2 = temp;
-}
+    fstream file;
+    file.open(filePath, ios::in);
 
+    if(file.is_open())
+    {
+        string line;
+        while (getline(file, line))
+        {
+            vFile.push_back(line);
+        }
+        file.close();
+    }
+}
 
 int main()
 {
-    int a = 1, b = 2;
+    vector<string> vFile;
+    loadDataFromFileToVector("test", vFile);
 
-    cout << "a Before Swaping Is: " << a << endl;
-    cout << "b Before Swaping Is: " << b << endl;
-    cout << endl;
-
-    swap(&a, &b);
-
-    cout << "a After Swaping Is: " << a << endl;
-    cout << "b After Swaping Is: " << b << endl;
-    cout << endl;
+    for(const string &line : vFile)
+    {
+        cout << line << endl;
+    }
     return 0;
 }
