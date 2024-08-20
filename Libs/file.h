@@ -72,4 +72,19 @@ namespace fileLib
         saveVectorToFile(filePath, fileContent);
     }
 
+    // Update item from file
+    void updateRecordFromFile(string filePath, string record, string updateRecord)
+    {
+        vector<string> fileContent;
+        loadDataFromFileToVector(filePath, fileContent);
+
+        for(string &line : fileContent)
+        {
+            if(line == record)
+                line = updateRecord;
+        }
+
+        saveVectorToFile(filePath, fileContent);
+    }
+
 }
