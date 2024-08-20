@@ -4,25 +4,25 @@
 
 namespace fileLib
 {
-    void printFileContent(string path)
+    // Print File Content
+    void printFileContent(string filePath)
     {
         fstream file;
-        file.open(path, ios::in); // in --> Read Mode
+        file.open(filePath, ios::in);
 
-        if (file.is_open())
+        if(file.is_open())
         {
             string line;
-            int lineCount = 0;
 
             while (getline(file, line))
             {
-                lineCount++;
-                cout << "[" << lineCount << "]: " << line << endl;
+                cout << line << endl;
             }
             file.close();
         }
     }
 
+    // Load Data From File To Vector
     void loadDataFromFileToVector(string filePath, vector<string> &vFile)
     {
         fstream file;
@@ -31,6 +31,7 @@ namespace fileLib
         if(file.is_open())
         {
             string line;
+
             while (getline(file, line))
             {
                 vFile.push_back(line);
@@ -38,20 +39,37 @@ namespace fileLib
             file.close();
         }
     }
-    void saveVectorToFile(string filePath, vector<string> &vFile)
+
+    // Save Vector To File
+    void saveVectorToFile(string filePath, vector<string> vFile)
     {
         fstream file;
+        file.open(filePath, ios::out);
 
-        file.open(filePath,  ios::out);
-
-       if(file.is_open())
-      {
-          for(string &str : vFile)
-      	  {
-              file << str << "\n";
-          }
-
-          file.close();
+        if(file.is_open())
+        {
+            for(const string &line : vFile)
+            {
+                if(line != "")
+                    file << line << "\n";
+            }
+            file.close();
+        }
     }
- }
+
+    // Delete item from file
+    void deleteRecordFromFile(string filePath, string record)
+    {
+        vector<string> fileContent;
+        loadDataFromFileToVector(filePath, fileContent);
+
+        for(string &line : fileContent)
+        {
+            if(line == record)
+                line = "";
+        }
+
+        saveVectorToFile(filePath, fileContent);
+    }
+
 }
