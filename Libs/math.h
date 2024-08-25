@@ -7,21 +7,21 @@ using namespace enNumberLib;
 
 namespace MathLib
 {
-    bool validateNumberInRange(int number , int from = 0, int to = 10)
+    bool validateNumberInRange(int number, int from = 0, int to = 10)
     {
         return (number >= from && number <= to);
     }
 
     int PowOfNumber(int Number, int Pow)
     {
-        if(Pow == 0)
+        if (Pow == 0)
         {
             return 1;
         }
 
         int P = 1;
 
-        for(int i = 0; i < Pow; i++)
+        for (int i = 0; i < Pow; i++)
         {
             P = P * Number;
         }
@@ -38,18 +38,18 @@ namespace MathLib
             cout << massage << ": ";
             cin >> Number;
         } while (Number < From || Number > To);
-        
+
         return Number;
     }
 
     enPrimeNotPrime CheckPrime(int Number)
     {
-        
+
         int M = round(Number / 2);
 
-        for(int i = 2; i <= M; i++)
+        for (int i = 2; i <= M; i++)
         {
-            if(Number % i == 0)
+            if (Number % i == 0)
                 return enPrimeNotPrime::NotPrime;
         }
 
@@ -60,9 +60,9 @@ namespace MathLib
     {
         int Sum = 0;
 
-        for(int i = 1; i < Number; i++)
+        for (int i = 1; i < Number; i++)
         {
-            if(Number % i == 0)
+            if (Number % i == 0)
             {
                 Sum += i;
             }
@@ -73,12 +73,12 @@ namespace MathLib
     int CountDigitOfNumberFrequency(int Number, int Digit)
     {
         int Remender = 0, Count = 0;
-        
+
         while (Number > 0)
         {
             Remender = Number % 10;
 
-            if(Remender == Digit)
+            if (Remender == Digit)
                 Count++;
 
             Number = Number / 10;
@@ -90,12 +90,12 @@ namespace MathLib
     void PrintAllDigitsFrequency(int Number)
     {
 
-        for(int i = 0; i < 10; i++)
+        for (int i = 0; i < 10; i++)
         {
             short DigitFrequency = 0;
             DigitFrequency = CountDigitOfNumberFrequency(Number, i);
 
-            if(DigitFrequency > 0)
+            if (DigitFrequency > 0)
             {
                 cout << "Digit " << i << " Frequency Is: " << DigitFrequency << " Time(s)" << endl;
             }
@@ -106,7 +106,6 @@ namespace MathLib
     {
         int Reverse = 0, LastDigit = 0;
 
-        
         while (Number > 0)
         {
             LastDigit = Number % 10;
@@ -121,7 +120,6 @@ namespace MathLib
     {
         int Remender = 0;
 
-        
         while (Number > 0)
         {
             Remender = Number % 10;
@@ -137,9 +135,9 @@ namespace MathLib
 
     void PrintInvertedNumberPattern(int Number)
     {
-        for(int i = Number; i >= 1; i--)
+        for (int i = Number; i >= 1; i--)
         {
-            for(int j = 1; j <= i; j++)
+            for (int j = 1; j <= i; j++)
             {
                 cout << i;
             }
@@ -149,9 +147,9 @@ namespace MathLib
 
     void PrintNumberPattern(int Number)
     {
-        for(int i = 1; i <= Number; i++)
+        for (int i = 1; i <= Number; i++)
         {
-            for(int j = 0; j < i; j++)
+            for (int j = 0; j < i; j++)
             {
                 cout << i;
             }
@@ -161,9 +159,9 @@ namespace MathLib
 
     void PrintInvertedLetterPattern(int Number)
     {
-        for(int i = 65 + Number - 1; i >= 65; i--)
+        for (int i = 65 + Number - 1; i >= 65; i--)
         {
-            for(int j = 1; j <= Number - ( 65 + Number - 1 - i); j++)
+            for (int j = 1; j <= Number - (65 + Number - 1 - i); j++)
             {
                 cout << char(i);
             }
@@ -173,9 +171,9 @@ namespace MathLib
 
     void PrintLetterPattern(int Number)
     {
-        for(int i = 65; i <= (65 + Number - 1); i++)
+        for (int i = 65; i <= (65 + Number - 1); i++)
         {
-            for(int j = 1; j <= (i - 65 + 1); j++)
+            for (int j = 1; j <= (i - 65 + 1); j++)
             {
                 cout << char(i);
             }
@@ -190,7 +188,7 @@ namespace MathLib
     }
 
     // By Referncing
-    void Swap(int& A, int& B)
+    void Swap(int &A, int &B)
     {
         int Temp;
         Temp = A;
@@ -234,9 +232,9 @@ namespace MathLib
         int IntPart = int(Number);
         float Frection = GetFractionPart(Number);
 
-        if(MyABS(Frection) >= .5)
+        if (MyABS(Frection) >= .5)
         {
-            if(Number > 0)
+            if (Number > 0)
                 return ++IntPart;
             else
                 return --IntPart;
@@ -244,12 +242,12 @@ namespace MathLib
         else
         {
             return IntPart;
-        } 
+        }
     }
 
     int MyFloor(float Number)
     {
-        if(Number > 0)
+        if (Number > 0)
             return int(Number);
         else
             return int(Number) - 1;
@@ -257,9 +255,9 @@ namespace MathLib
 
     int MyCeil(float Number)
     {
-        if(MyABS(GetFractionPart(Number)) > 0)
+        if (MyABS(GetFractionPart(Number)) > 0)
         {
-            if(Number > 0)
+            if (Number > 0)
                 return int(Number) + 1;
             else
                 return int(Number);
@@ -284,7 +282,8 @@ namespace MathLib
     // 5 * (5 * (5 * (5 * (5 * (1)))))
     int Pow(int Base, int Power)
     {
-        if(Power == 0) return 1;
+        if (Power == 0)
+            return 1;
         else
         {
             return Base * Pow(Base, Power - 1);

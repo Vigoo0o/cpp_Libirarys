@@ -62,5 +62,14 @@ namespace IOLib
         return Number;
     }
 
+    string readString(string massage = "Enter String:\n")
+    {
+        string str;
+
+        cout << massage;
+        getline(cin, str);
+
+        return str;
+    }
 
 }

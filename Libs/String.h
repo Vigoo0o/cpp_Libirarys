@@ -6,22 +6,12 @@ using namespace std;
 
 namespace StringLib
 {
-    // static to be call without object
-    string toUpper(string str)
-    {
-        string result = "";
-        for (int i = 0; i < str.length(); i++)
-        {
-            result += toupper(str[i]);
-        }
-        return result;
-    }
 
     string reverseString(string str)
     {
         string reversed = "";
 
-        for(int i = str.length() - 1; i >= 0; i--)
+        for (int i = str.length() - 1; i >= 0; i--)
             reversed += str[i];
 
         return reversed;
@@ -30,14 +20,14 @@ namespace StringLib
     string stringRepeat(string str, int r = 2, string sep = ", ", bool showEnd = false)
     {
         string result = "";
-        for(int i = 0; i < r; i++)
+        for (int i = 0; i < r; i++)
         {
             result += str;
-            if(!(i + 1 == r))
+            if (!(i + 1 == r))
                 result += sep;
         }
 
-        if(showEnd)
+        if (showEnd)
             result += sep;
 
         return result;
@@ -49,9 +39,9 @@ namespace StringLib
         int firstCharsCount = 0;
         int lastCharsCount = 0;
 
-        for(int i = 0; i < str.length(); i++)
+        for (int i = 0; i < str.length(); i++)
         {
-            if(str[i] == ch)
+            if (str[i] == ch)
             {
                 firstCharsCount++;
             }
@@ -60,9 +50,9 @@ namespace StringLib
                 break;
             }
         }
-        for(int i = str.length() - 1; i > 0; i--)
+        for (int i = str.length() - 1; i > 0; i--)
         {
-            if(str[i] == ch)
+            if (str[i] == ch)
             {
                 lastCharsCount++;
             }
@@ -72,23 +62,23 @@ namespace StringLib
             }
         }
 
-        if(direction == "Left")
+        if (direction == "Left")
         {
-            for(int i = firstCharsCount; i < str.length(); i++)
+            for (int i = firstCharsCount; i < str.length(); i++)
             {
                 result += str[i];
             }
         }
-        else if(direction == "Right")
+        else if (direction == "Right")
         {
-            for(int i = 0; i < str.length() - lastCharsCount; i++)
+            for (int i = 0; i < str.length() - lastCharsCount; i++)
             {
                 result += str[i];
             }
         }
-        else if(direction == "All")
+        else if (direction == "All")
         {
-            for(int i = firstCharsCount; i < str.length() - lastCharsCount; i++)
+            for (int i = firstCharsCount; i < str.length() - lastCharsCount; i++)
             {
                 result += str[i];
             }
@@ -100,25 +90,13 @@ namespace StringLib
         return result;
     }
 
-    short length(string str)
-    {
-        int result = 0;
-
-        for(int i = 0; i < str.length(); i++)
-        {
-            result++;
-        }
-
-        return result;
-    }
-
     string subString(string str, int start = 0, int end = 10, bool incEnd = true, bool countSpace = true)
     {
         string result;
 
-        for(int i = start; incEnd ? i <= end : i < end; i++)
+        for (int i = start; incEnd ? i <= end : i < end; i++)
         {
-            if(!countSpace && str[i] == ' ')
+            if (!countSpace && str[i] == ' ')
             {
                 end++;
             }
@@ -131,13 +109,13 @@ namespace StringLib
     string cleanString(string str, bool keepnumber = true)
     {
         string result = "";
-        for(char c : str)
+        for (char c : str)
         {
-            if(c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z')
+            if (c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z')
             {
                 result += c;
             }
-            else if(keepnumber && c >= '0' && c <= '9')
+            else if (keepnumber && c >= '0' && c <= '9')
             {
                 result += c;
             }
@@ -149,34 +127,190 @@ namespace StringLib
     {
         short count = 0;
 
-        for(int i = 0; i < str.length(); i++)
+        for (int i = 0; i < str.length(); i++)
         {
-            if(str[i] == ' ')
+            if (str[i] == ' ')
                 count++;
         }
         count++;
         return count;
     }
 
-    string toLowerCase(string str)
+    void printFirstLetterOfEachword(string str)
     {
-        string result = "";
+        bool isFirstLetter = true;
 
-        for(char c : str)
+        for (short i = 0; i < str.length(); i++)
         {
-            if(int(c) >= 65 && int(c) <= 90)
-                result += char(c + 32);
-            else 
-                result += c;
+            if (str[i] != ' ' && isFirstLetter)
+            {
+                cout << str[i] << endl;
+            }
+            isFirstLetter = (str[i] == ' ' ? true : false);
+        }
+    }
+
+    bool isUpper(char c)
+    {
+        if (int(c) >= 65 && int(c) <= 90)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    bool isLower(char c)
+    {
+        if (int(c) >= 97 && int(c) <= 122)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    string upperFirstLetterOfEachWordASCII(string str)
+    {
+        bool isFirstLetter = true;
+
+        for (short i = 0; i < str.length(); i++)
+        {
+            if (str[i] != ' ' && isFirstLetter)
+            {
+                // Because if it is already upper don't change it
+                if (isLower(str[i]))
+                {
+                    str[i] = char(str[i] - 32);
+                }
+            }
+            isFirstLetter = (str[i] == ' ' ? true : false);
         }
 
-        return result;
+        return str;
     }
 
-    bool isPalindrom (string str)
+    string lowerFirstLetterOfEachWordASCII(string str)
+    {
+        bool isFirstLetter = true;
+
+        for (short i = 0; i < str.length(); i++)
+        {
+            if (str[i] != ' ' && isFirstLetter)
+            {
+                // Because if it is already upper don't change it
+                if (isUpper(str[i]))
+                {
+                    str[i] = char(str[i] + 32);
+                }
+            }
+            isFirstLetter = (str[i] == ' ' ? true : false);
+        }
+
+        return str;
+    }
+
+    string toUpper(string str)
+    {
+        for (short i = 0; i < str.length(); i++)
+        {
+            if (isLower(str[i]))
+            {
+                str[i] = char(str[i] - 32);
+            }
+        }
+        return str;
+    }
+
+    string toLower(string str)
+    {
+        for (short i = 0; i < str.length(); i++)
+        {
+            if (isUpper(str[i]))
+            {
+                str[i] = char(str[i] + 32);
+            }
+        }
+
+        return str;
+    }
+
+    bool isPalindrom(string str)
     {
         string strReverse = reverseString(str);
-        return toLowerCase(strReverse) == toLowerCase(str) ? true : false;
+        return toLower(strReverse) == toLower(str) ? true : false;
     }
 
+    char invertLetterCase(char c)
+    {
+        if (isUpper(c))
+            return char(c + 32);
+        else if (isLower(c))
+            return char(c - 32);
+        else
+            return c;
+    }
+
+    string invertCase(string str)
+    {
+        for (short i = 0; i < str.length(); i++)
+        {
+            str[i] = invertLetterCase(str[i]);
+        }
+
+        return str;
+    }
+
+    short length(string str)
+    {
+        short counter = 0;
+
+        for (char &c : str)
+        {
+            counter++;
+        }
+
+        return counter;
+    }
+
+    short lengthOfCapitalLetters(string str)
+    {
+        short counter = 0;
+
+        for (char &c : str)
+        {
+            if (isUpper(char(c)))
+            {
+                counter++;
+            }
+        }
+
+        return counter;
+    }
+
+    short lengthOfSmallLetters(string str)
+    {
+        short counter = 0;
+
+        for (char &c : str)
+        {
+            if (isLower(char(c)))
+            {
+                counter++;
+            }
+        }
+
+        return counter;
+    }
+
+    short countCharExist(string str, char c)
+    {
+        short counter = 0;
+
+        for (const char &ch : str)
+        {
+            if (ch == c)
+                counter++;
+        }
+
+        return counter;
+    }
 }

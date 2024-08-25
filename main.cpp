@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <iomanip>
 
 #include "./Libs/array.h"
 #include "./Libs/IO.h"
@@ -14,16 +15,9 @@
 
 using namespace std;
 
-
+// 30 --> Done
 
 int main()
 {
-    vector<string> vFile;
-    loadDataFromFileToVector("test", vFile);
-
-    for(const string &line : vFile)
-    {
-        cout << line << endl;
-    }
     return 0;
 }
