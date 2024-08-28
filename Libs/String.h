@@ -2,6 +2,8 @@
 #include <string>
 #include <iostream>
 #include <cctype>
+
+#include "struct.h"
 using namespace std;
 
 namespace StringLib
@@ -29,63 +31,6 @@ namespace StringLib
 
         if (showEnd)
             result += sep;
-
-        return result;
-    }
-
-    string trimString(string str, string direction = "All", char ch = ' ')
-    {
-        string result = "";
-        int firstCharsCount = 0;
-        int lastCharsCount = 0;
-
-        for (int i = 0; i < str.length(); i++)
-        {
-            if (str[i] == ch)
-            {
-                firstCharsCount++;
-            }
-            else
-            {
-                break;
-            }
-        }
-        for (int i = str.length() - 1; i > 0; i--)
-        {
-            if (str[i] == ch)
-            {
-                lastCharsCount++;
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        if (direction == "Left")
-        {
-            for (int i = firstCharsCount; i < str.length(); i++)
-            {
-                result += str[i];
-            }
-        }
-        else if (direction == "Right")
-        {
-            for (int i = 0; i < str.length() - lastCharsCount; i++)
-            {
-                result += str[i];
-            }
-        }
-        else if (direction == "All")
-        {
-            for (int i = firstCharsCount; i < str.length() - lastCharsCount; i++)
-            {
-                result += str[i];
-            }
-        }
-
-        cout << firstCharsCount << endl;
-        cout << lastCharsCount << endl;
 
         return result;
     }
@@ -301,16 +246,198 @@ namespace StringLib
         return counter;
     }
 
-    short countCharExist(string str, char c)
+    short countChar(string str, char c, bool caseSensitive = true)
     {
         short counter = 0;
 
         for (const char &ch : str)
         {
-            if (ch == c)
-                counter++;
+            if (caseSensitive)
+            {
+                if (ch == c)
+                {
+                    counter++;
+                }
+            }
+            else
+            {
+                if (ch == c || ch == invertLetterCase(c))
+                {
+                    counter++;
+                }
+            }
         }
 
         return counter;
+    }
+
+    vector<string> split(string str, string delimeter)
+    {
+        vector<string> result;
+
+        short position = 0;
+        string sStr;
+
+        while ((position = str.find(delimeter)) != string::npos)
+        {
+            sStr = str.substr(0, position);
+
+            result.push_back(sStr);
+
+            str.erase(0, position + delimeter.length());
+        }
+
+        result.push_back(str);
+
+        return result;
+    }
+
+    string trim(string str, string direction = "All")
+    {
+        string result = "";
+        short firstLetterPos = 0;
+        short lastLetterPos = 0;
+
+        // Get Position Of First Letter
+        for (short i = 0; i < str.length(); i++)
+        {
+            if (str[i] == ' ')
+                firstLetterPos++;
+            else
+                break;
+        }
+
+        // Get Position Of Last Letter
+        for (short i = str.length() - 1; i > 0; i--)
+        {
+            if (str[i] == ' ')
+                lastLetterPos++;
+            else
+                break;
+        }
+
+        if (direction == "Left")
+        {
+            for (short i = firstLetterPos; i < str.length(); i++)
+                result += str[i];
+        }
+        else if (direction == "Right")
+        {
+            for (short i = 0; i < str.length() - lastLetterPos; i++)
+                result += str[i];
+        }
+        else if (direction == "All")
+        {
+            for (short i = firstLetterPos; i < str.length() - lastLetterPos; i++)
+                result += str[i];
+        }
+
+        return result;
+    }
+
+    string joinString(vector<string> vector, string delemeer = " ")
+    {
+        string result = "";
+
+        for (short i = 0; i < vector.size(); i++)
+        {
+            if (i != vector.size() - 1)
+                result += vector[i] + delemeer;
+            else
+                result += vector[i];
+        }
+
+        return result;
+    }
+
+    string joinString(string arr[], short size, string delemeer = " ")
+    {
+        string result = "";
+
+        for (short i = 0; i < size; i++)
+        {
+            if (i != size - 1)
+                result += arr[i] + delemeer;
+            else
+                result += arr[i];
+        }
+
+        return result;
+    }
+
+    string reverseWordsInString(string str)
+    {
+        string result = "";
+        vector<string> vStr = split(str, " ");
+
+        vector<string>::iterator itr = vStr.end();
+
+        while (itr != vStr.begin())
+        {
+            --itr;
+            result += *itr + " ";
+        }
+
+        return result;
+    }
+
+    string replaceWordsInString(string str, string replace, string replaceWith, bool caseSensitive = false)
+    {
+        string result = "";
+        vector<string> vStr = split(str, " ");
+
+        for (short i = 0; i < vStr.size(); i++)
+        {
+            if (caseSensitive)
+            {
+                if (vStr[i] == replace)
+                    vStr[i] = replaceWith;
+            }
+            else
+            {
+                if (toLower(vStr[i]) == toLower(replace))
+                    vStr[i] = replaceWith;
+            }
+        }
+
+        for (const string &str : vStr)
+        {
+            result += str + " ";
+        }
+
+        return result;
+    }
+
+    bool isPunctuation(char c)
+    {
+        if (c == '.' || c == '?' || c == '!' || c == ',' || c == ';' || c == ':' || c == '-' || c == '_' || c == '(' || c == ')' || c == '[' || c == ']' || c == '{' || c == '}' || c == '\'' || c == '\"')
+            return true;
+        return false;
+    }
+
+    string removePunctuationInString(string str)
+    {
+        string result = "";
+
+        for (const char &c : str)
+        {
+            if (!isPunctuation(c))
+                result += c;
+        }
+
+        return result;
+    }
+
+    string convertRecordToLine(structLib::stClient client, string separetor)
+    {
+        string lineRecord = "";
+
+        lineRecord += client.accountNumber + separetor;
+        lineRecord += client.binCode + separetor;
+        lineRecord += client.name + separetor;
+        lineRecord += client.phoneNumber + separetor;
+        lineRecord += to_string(client.accountBalance);
+
+        return lineRecord;
     }
 }
